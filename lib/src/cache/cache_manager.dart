@@ -48,7 +48,6 @@ class AssetsAudioPlayerCacheManager {
     String intoPath,
     CacheDownloadListener cacheDownloadListener,
   ) async {
-    print(intoPath);
     if (_downloadingElements.containsKey(intoPath)) {
       // is already downloading it
       final downloader = _downloadingElements[intoPath];

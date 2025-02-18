@@ -34,8 +34,7 @@ class _MyAppState extends State<MyApp> {
 class RecorderExample extends StatefulWidget {
   final LocalFileSystem localFileSystem;
 
-  RecorderExample({localFileSystem})
-      : localFileSystem = localFileSystem ?? LocalFileSystem();
+  RecorderExample({localFileSystem}) : localFileSystem = localFileSystem ?? LocalFileSystem();
 
   @override
   State<StatefulWidget> createState() => RecorderExampleState();
@@ -57,9 +56,7 @@ class RecorderExampleState extends State<RecorderExample> {
     return Center(
       child: Padding(
         padding: EdgeInsets.all(8.0),
-        child:
-            Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: <
-                Widget>[
+        child: Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -99,10 +96,9 @@ class RecorderExampleState extends State<RecorderExample> {
                 ),
               ),
               TextButton(
-                onPressed:
-                    _currentStatus != RecordingStatus.Unset ? _stop : null,
+                onPressed: _currentStatus != RecordingStatus.Unset ? _stop : null,
                 style: TextButton.styleFrom(
-                  foregroundColor: Colors.blueAccent.withOpacity(0.5),
+                  foregroundColor: Colors.blueAccent.withValues(alpha: 0.5),
                 ),
                 child: Text('Stop', style: TextStyle(color: Colors.white)),
               ),
@@ -112,7 +108,7 @@ class RecorderExampleState extends State<RecorderExample> {
               TextButton(
                 onPressed: onPlayAudio,
                 style: TextButton.styleFrom(
-                  foregroundColor: Colors.blueAccent.withOpacity(0.5),
+                  foregroundColor: Colors.blueAccent.withValues(alpha: 0.5),
                 ),
                 child: Text('Play', style: TextStyle(color: Colors.white)),
               ),
@@ -146,15 +142,12 @@ class RecorderExampleState extends State<RecorderExample> {
 
         if (appDocDirectory != null) {
           // can add extension like '.mp4' '.wav' '.m4a' '.aac'
-          customPath = appDocDirectory.path +
-              customPath +
-              DateTime.now().millisecondsSinceEpoch.toString();
+          customPath = appDocDirectory.path + customPath + DateTime.now().millisecondsSinceEpoch.toString();
 
           // .wav <---> AudioFormat.WAV
           // .mp4 .m4a .aac <---> AudioFormat.AAC
           // AudioFormat is optional, if given value, will overwrite path extension when there is conflicts.
-          _recorder =
-              FlutterAudioRecorder(customPath, audioFormat: AudioFormat.WAV);
+          _recorder = FlutterAudioRecorder(customPath, audioFormat: AudioFormat.WAV);
 
           await _recorder.initialized;
           // after initialization
@@ -170,8 +163,7 @@ class RecorderExampleState extends State<RecorderExample> {
           });
         }
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('You must accept permissions')));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('You must accept permissions')));
       }
     } catch (e) {
       print(e);
