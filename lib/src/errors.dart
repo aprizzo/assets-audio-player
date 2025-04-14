@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'assets_audio_player.dart';
 import 'player_group.dart';
 
@@ -20,8 +22,7 @@ class ErrorHandler {
 }
 
 typedef AssetsAudioPlayerErrorHandler = Function(ErrorHandler errorHandler);
-typedef AssetsAudioPlayerGroupErrorHandler = Function(
-    AssetsAudioPlayerGroup group, ErrorHandler errorHandler);
+typedef AssetsAudioPlayerGroupErrorHandler = Function(AssetsAudioPlayerGroup group, ErrorHandler errorHandler);
 
 AssetsAudioPlayerErrorType parseAssetsAudioPlayerErrorType(String type) {
   switch (type) {

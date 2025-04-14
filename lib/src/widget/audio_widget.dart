@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
@@ -18,8 +20,8 @@ class AudioWidget extends StatefulWidget {
   final Function()? onFinished;
   final Duration initialPosition;
 
-  AudioWidget({
-    Key? key,
+  const AudioWidget({
+    super.key,
     required this.audio,
     required this.child,
     this.volume = 1.0,
@@ -29,10 +31,10 @@ class AudioWidget extends StatefulWidget {
     this.initialPosition = const Duration(),
     this.onReadyToPlay,
     this.onFinished,
-  }) : super(key: key);
+  });
 
   AudioWidget.assets({
-    Key? key,
+    super.key,
     required this.child,
     required String path,
     String? package,
@@ -43,11 +45,10 @@ class AudioWidget extends StatefulWidget {
     this.initialPosition = const Duration(),
     this.onReadyToPlay,
     this.onFinished,
-  })  : audio = Audio(path, package: package),
-        super(key: key);
+  }) : audio = Audio(path, package: package);
 
   AudioWidget.network({
-    Key? key,
+    super.key,
     required this.child,
     required String url,
     this.volume = 1.0,
@@ -57,11 +58,10 @@ class AudioWidget extends StatefulWidget {
     this.initialPosition = const Duration(),
     this.onReadyToPlay,
     this.onFinished,
-  })  : audio = Audio.network(url),
-        super(key: key);
+  }) : audio = Audio.network(url);
 
   AudioWidget.file({
-    Key? key,
+    super.key,
     required this.child,
     required String path,
     this.volume = 1.0,
@@ -71,8 +71,7 @@ class AudioWidget extends StatefulWidget {
     this.initialPosition = const Duration(),
     this.onReadyToPlay,
     this.onFinished,
-  })  : audio = Audio.network(path),
-        super(key: key);
+  }) : audio = Audio.network(path);
 
   @override
   _AudioWidgetState createState() => _AudioWidgetState();
@@ -117,11 +116,7 @@ class _AudioWidgetState extends State<AudioWidget> {
   }
 
   void _open() {
-    _player.open(widget.audio,
-        autoStart: widget.play,
-        volume: widget.volume,
-        seek: widget.initialPosition,
-        loopMode: widget.loopMode);
+    _player.open(widget.audio, autoStart: widget.play, volume: widget.volume, seek: widget.initialPosition, loopMode: widget.loopMode);
 
     _onReadyToPlaySubscription?.cancel();
     _onReadyToPlaySubscription = null;
@@ -134,8 +129,7 @@ class _AudioWidgetState extends State<AudioWidget> {
 
     _playlistAudioFinishedSubscription?.cancel();
     _playlistAudioFinishedSubscription = null;
-    _playlistAudioFinishedSubscription =
-        _player.playlistAudioFinished.listen((event) {
+    _playlistAudioFinishedSubscription = _player.playlistAudioFinished.listen((event) {
       if (widget.onFinished != null) {
         widget.onFinished!();
       }

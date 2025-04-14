@@ -37,11 +37,7 @@ class PlayingAudio {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is PlayingAudio &&
-          runtimeType == other.runtimeType &&
-          audio == other.audio &&
-          duration == other.duration;
+      identical(this, other) || other is PlayingAudio && runtimeType == other.runtimeType && audio == other.audio && duration == other.duration;
 
   @override
   int get hashCode => audio.hashCode ^ duration.hashCode;
@@ -71,10 +67,7 @@ class ReadingPlaylist {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ReadingPlaylist &&
-          runtimeType == other.runtimeType &&
-          audios == other.audios &&
-          currentIndex == other.currentIndex;
+      other is ReadingPlaylist && runtimeType == other.runtimeType && audios == other.audios && currentIndex == other.currentIndex;
 
   @override
   int get hashCode => audios.hashCode ^ currentIndex.hashCode;
@@ -94,7 +87,7 @@ class Playing {
   /// the parent playlist
   final ReadingPlaylist playlist;
 
-  Playing({
+  const Playing({
     required this.audio,
     required this.index,
     required this.hasNext,
@@ -117,8 +110,7 @@ class Playing {
           playlist == other.playlist;
 
   @override
-  int get hashCode =>
-      audio.hashCode ^ index.hashCode ^ hasNext.hashCode ^ playlist.hashCode;
+  int get hashCode => audio.hashCode ^ index.hashCode ^ hasNext.hashCode ^ playlist.hashCode;
 }
 
 @immutable
@@ -145,9 +137,7 @@ class RealtimePlayingInfos {
     this.isShuffling,
   }) : duration = current?.audio.duration ?? Duration();
 
-  double get playingPercent => duration.inMilliseconds == 0
-      ? 0
-      : currentPosition.inMilliseconds / duration.inMilliseconds;
+  double get playingPercent => duration.inMilliseconds == 0 ? 0 : currentPosition.inMilliseconds / duration.inMilliseconds;
 
   @override
   bool operator ==(Object other) =>

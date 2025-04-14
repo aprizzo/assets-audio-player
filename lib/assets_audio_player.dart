@@ -1,4 +1,4 @@
-library assets_audio_player;
+library;
 
 export 'package:assets_audio_player/src/assets_audio_player.dart';
 export 'package:assets_audio_player/src/player_group.dart';

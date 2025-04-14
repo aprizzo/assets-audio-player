@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 enum HeadPhoneStrategy { none, pauseOnUnplug, pauseOnUnplugPlayOnPlug }
 
 String describeHeadPhoneStrategy(HeadPhoneStrategy strategy) {
@@ -27,10 +29,7 @@ class AudioFocusStrategy {
   /// resumeAfterInterruption : When other app request focus (phone call, other player like spotify play), pause the AssetMediaPlayer
   ///
   /// resumeOthersPlayersAfterDone : When this player finish to play, tell others native players (like spotify), to resume
-  const AudioFocusStrategy.request(
-      {this.resumeAfterInterruption = false,
-      this.resumeOthersPlayersAfterDone = false})
-      : request = true;
+  const AudioFocusStrategy.request({this.resumeAfterInterruption = false, this.resumeOthersPlayersAfterDone = false}) : request = true;
 }
 
 Map<String, dynamic> describeAudioFocusStrategy(AudioFocusStrategy strategy) {

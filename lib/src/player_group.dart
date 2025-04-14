@@ -1,13 +1,13 @@
+// ignore_for_file: constant_identifier_names
+
 import 'dart:async';
 
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/services.dart';
 import 'package:rxdart/rxdart.dart';
 
-typedef PlayerGroupCallback = void Function(
-    AssetsAudioPlayerGroup playerGroup, List<PlayingAudio> audios);
-typedef PlayerGroupMetasCallback = Future<PlayerGroupMetas> Function(
-    AssetsAudioPlayerGroup playerGroup, List<PlayingAudio> audios);
+typedef PlayerGroupCallback = void Function(AssetsAudioPlayerGroup playerGroup, List<PlayingAudio> audios);
+typedef PlayerGroupMetasCallback = Future<PlayerGroupMetas> Function(AssetsAudioPlayerGroup playerGroup, List<PlayingAudio> audios);
 
 const _DEFAULT_RESPECT_SILENT_MODE = false;
 const _DEFAULT_SHOW_NOTIFICATION = false;
@@ -44,8 +44,7 @@ class AssetsAudioPlayerGroup {
   final Map<Audio, AssetsAudioPlayer> _audiosWithPlayers = {};
 
   // copy of _audiosWithPlayers
-  Map<Audio, AssetsAudioPlayer> get audiosWithPlayers =>
-      Map.from(_audiosWithPlayers);
+  Map<Audio, AssetsAudioPlayer> get audiosWithPlayers => Map.from(_audiosWithPlayers);
 
   List<Audio> get audios => _audiosWithPlayers.keys.toList();
   List<AssetsAudioPlayer> get players => _audiosWithPlayers.values.toList();
@@ -71,7 +70,6 @@ class AssetsAudioPlayerGroup {
   }) {
     // default action, can be overriden using player.onErrorDo = (error, player) { ACTION };
     onErrorDo = (group, errorHandler) {
-      print(errorHandler.error.message);
       errorHandler.player.stop();
     };
   }
@@ -274,13 +272,13 @@ class AssetsAudioPlayerGroup {
   }
 
   void dispose() {
-    _subscriptions.forEach((element) {
+    for (var element in _subscriptions) {
       element.cancel();
-    });
+    }
     _subscriptions.clear();
-    players.forEach((element) {
+    for (var element in players) {
       element.dispose();
-    });
+    }
 
     _isPlaying.close();
   }
